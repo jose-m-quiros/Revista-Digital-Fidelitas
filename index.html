@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBERDEFENSA CR - Volumen 1 | Número 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-navy: #0B1426;
+            --primary-blue: #1E40AF;
+            --accent-electric: #3B82F6;
+            --accent-cyan: #06B6D4;
+            --accent-purple: #8B5CF6;
+            --text-primary: #FFFFFF;
+            --text-secondary: #CBD5E1;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --bg-light: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --bg-glass: rgba(255, 255, 255, 0.08);
+            --bg-glass-dark: rgba(0, 0, 0, 0.02);
+            --gradient-primary: linear-gradient(135deg, #1E40AF 0%, #3B82F6 50%, #06B6D4 100%);
+            --gradient-secondary: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+            --gradient-dark: linear-gradient(135deg, #0B1426 0%, #1E293B 50%, #334155 100%);
+            --gradient-light: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 24px 80px rgba(0, 0, 0, 0.16);
+            --border-glass: rgba(255, 255, 255, 0.12);
+            --border-light: rgba(0, 0, 0, 0.06);
+            --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --transition-spring: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Animated Mesh Background */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(30, 64, 175, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
+                linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            animation: meshFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes meshFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(0.5deg); }
+        }
+
+        /* Glass morphism container */
+        .magazine-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            box-shadow: var(--shadow-xl);
+            border-radius: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Enhanced Navigation */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 20, 38, 0.95);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            z-index: 1000;
+            padding: 0;
+            transition: var(--transition-smooth);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .nav-bar.scrolled {
+            background: rgba(11, 20, 38, 0.98);
+            box-shadow: var(--shadow-lg);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .nav-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 12px 24px;
+            border-radius: 50px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            backdrop-filter: blur(16px);
+        }
+
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: var(--transition-smooth);
+            z-index: -1;
+            border-radius: 50px;
+        }
+
+        .nav-menu a:hover::before,
+        .nav-menu a.active::before {
+            left: 0;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: white;
+            transform: translateY(-2px);
+            border-color: var(--border-glass);
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+        }
+
+        .nav-menu a i {
+            font-size: 0.85rem;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-menu a:hover i {
+            transform: scale(1.1);
+        }
+
+        /* Mobile Navigation */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+            background: var(--bg-glass);
+            border-radius: 12px;
+            border: 1px solid var(--border-glass);
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            margin: 2px 0;
+            transition: var(--transition-smooth);
+            border-radius: 1px;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: heroFloat 25s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-20px) rotate(1deg); opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            padding: 0 40px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            backdrop-filter: blur(16px);
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            letter-spacing: -3px;
+            line-height: 0.9;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1s ease-out 0.2s both;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+            font-weight: 400;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideUp 1s ease-out 0.4s both;
+        }
+
+        .hero-image-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 60px;
+            animation: slideUp 1s ease-out 0.6s both;
+        }
+
+        .hero-image {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 
+                0 32px 80px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: var(--transition-spring);
+            border: 1px solid var(--border-glass);
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02) rotateX(2deg) rotateY(2deg);
+            box-shadow: 
+                0 40px 100px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-info {
+            background: var(--bg-glass);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--border-glass);
+            padding: 24px 40px;
+            border-radius: 20px;
+            display: inline-block;
+            color: var(--text-primary);
+            font-weight: 500;
+            animation: slideUp 1s ease-out 0.8s both;
+            box-shadow: var(--shadow-md);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Magazine-style Sections */
+        .section {
+            padding: 120px 60px;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: var(--gradient-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 100px;
+            position: relative;
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 1px;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Cards */
+        .card {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 60px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition-smooth);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .card-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+        }
+
+        .card-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 20px;
+            margin: 40px auto;
+            display: block;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+            border: 1px solid var(--border-light);
+        }
+
+        .card-image:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Magazine-style Index */
+        .index-grid {
+            display: grid;
+            gap: 16px;
+            margin-top: 80px;
+        }
+
+        .index-item {
+            display: grid;
+            grid-template-columns: 60px 1fr auto;
+            align-items: center;
+            gap: 24px;
+            padding: 32px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .index-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.02) 50%, transparent 100%);
+            transition: var(--transition-smooth);
+        }
+
+        .index-item:hover::before {
+            left: 100%;
+        }
+
+        .index-item:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .index-number {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .index-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .index-page {
+            background: var(--bg-glass-dark);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-light);
+        }
+
+        /* Enhanced Statistics */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin: 80px 0;
+        }
+
+        .stat-card {
+            background: var(--gradient-primary);
+            padding: 48px 36px;
+            border-radius: 24px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-spring);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            opacity: 0.95;
+            line-height: 1.4;
+        }
+
+        /* Enhanced Quote Blocks */
+        .quote-block {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+            border-left: 4px solid var(--accent-electric);
+            padding: 40px;
+            margin: 40px 0;
+            border-radius: 0 20px 20px 0;
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .quote-block::before {
+            content: '"';
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            font-size: 4rem;
+            color: var(--accent-electric);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--primary-navy);
+            color: var(--text-primary);
+            padding: 32px;
+            border-radius: 16px;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.95rem;
+            margin: 32px 0;
+            overflow-x: auto;
+            border: 1px solid var(--border-glass);
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+        }
+
+        /* Highlight Styles */
+        .highlight {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .text-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        /* Book Reviews */
+        .book-review {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 60px;
+            align-items: start;
+            margin: 80px 0;
+        }
+
+        .book-cover-container {
+            position: relative;
+        }
+
+        .book-cover {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 
+                0 24px 48px rgba(0, 0, 0, 0.2),
+                0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: var(--transition-spring);
+            border: 1px solid var(--border-light);
+        }
+
+        .book-cover:hover {
+            transform: rotateY(8deg) scale(1.02);
+            box-shadow: 
+                0 32px 64px rgba(0, 0, 0, 0.3),
+                0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .book-info h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .book-meta {
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 32px;
+            font-size: 1.1rem;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        /* Featured Grid */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 48px;
+            margin-top: 80px;
+        }
+
+        /* Advertisement Sections */
+        .ad-section {
+            background: var(--gradient-dark);
+            color: var(--text-primary);
+            text-align: center;
+            padding: 120px 80px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 32px;
+        }
+
+        .ad-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+            animation: adFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes adFloat {
+            0%, 100% { transform: translateX(0px) rotate(0deg); }
+            50% { transform: translateX(20px) rotate(1deg); }
+        }
+
+        .ad-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.1;
+        }
+
+        .ad-content {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            background: var(--gradient-dark);
+            color: var(--text-primary);
+            padding: 100px 80px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 48px;
+            text-align: center;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .footer-section h4 {
+            color: var(--accent-cyan);
+            margin-bottom: 24px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-spring);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Source citation */
+        .source {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1400px) {
+            .section {
+                padding: 100px 40px;
+            }
+            
+            .nav-content {
+                padding: 20px 30px;
+            }
+
+            .footer {
+                padding: 80px 40px 60px;
+            }
+
+            .ad-section {
+                padding: 100px 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .nav-toggle {
+                display: flex;
+            }
+            
+            .nav-content {
+                padding: 16px 20px;
+            }
+            
+            .hero-content {
+                padding: 0 20px;
+            }
+            
+            .section {
+                padding: 80px 20px;
+            }
+            
+            .card {
+                padding: 40px 24px;
+            }
+            
+            .book-review {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer {
+                padding: 60px 20px 40px;
+            }
+
+            .ad-section {
+                padding: 80px 20px;
+                margin: 60px 0;
+            }
+
+            .section-header {
+                margin-bottom: 60px;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile menu styles */
+        .nav-menu.mobile-active {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 76px;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 20, 38, 0.98);
+            backdrop-filter: blur(32px);
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-glass);
+            animation: slideDown 0.4s ease-out;
+            box-shadow: var(--shadow-lg);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-menu.mobile-active a {
+            margin: 0;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-glass);
+            justify-content: flex-start;
+            border-radius: 12px;
+        }
+
+        .nav-menu.mobile-active a:hover {
+            background: var(--bg-glass);
+            transform: translateX(8px);
+        }
+
+        /* Loading states */
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-mesh"></div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar" id="navbar">
+        <div class="nav-content">
+            <a href="#hero" class="nav-logo">CYBERDEFENSA CR</a>
+            
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="#indice"><i class="fas fa-list"></i> Índice</a></li>
+                <li><a href="#editorial"><i class="fas fa-edit"></i> Editorial</a></li>
+                <li><a href="#noticias"><i class="fas fa-newspaper"></i> Noticias</a></li>
+                <li><a href="#articulos"><i class="fas fa-file-alt"></i> Artículos</a></li>
+                <li><a href="#libros"><i class="fas fa-book"></i> Reseñas</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="magazine-container">
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Volumen 1, Número 1</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    <span class="gradient-text">CYBERDEFENSA</span> CR
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Edición Especial: Herramientas de Detección de Intrusos en la Era Digital
+                </p>
+                
+                <div class="hero-image-container">
+                    <img src="https://images.pexels.com/photos/5380650/pexels-photo-5380650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Ilustración de ciberseguridad" class="hero-image">
+                </div>
+                
+                <div class="hero-info">
+                    <i class="fas fa-university"></i>
+                    Universidad Fidélitas - Costa Rica<br>
+                    <strong>Julio 2025</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Index Section -->
+        <section id="indice" class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Índice de Contenidos</h2>
+                <p class="section-subtitle">Explora el contenido de esta edición especial sobre detección de intrusos y ciberseguridad</p>
+            </div>
+            
+            <div class="index-grid">
+                <a href="#editorial" class="index-item">
+                    <div class="index-number">01</div>
+                    <div class="index-title">Editorial: La Importancia Crítica de la Detección de Intrusos</div>
+                    <div class="index-page">Pág. 04</div>
+                </a>
+                <a href="#noticia1" class="index-item">
+                    <div class="index-number">02</div>
+                    <div class="index-title">Ciberataques Globales Aumentan 75% en 2024</div>
+                    <div class="index-page">Pág. 05</div>
+                </a>
+                <a href="#noticia2" class="index-item">
+                    <div class="index-number">03</div>
+                    <div class="index-title">IA Revoluciona la Detección de Amenazas en 2025</div>
+                    <div class="index-page">Pág. 06</div>
+                </a>
+                <a href="#articulo1" class="index-item">
+                    <div class="index-number">04</div>
+                    <div class="index-title">Evolución Tecnológica de los Sistemas IDS/IPS</div>
+                    <div class="index-page">Pág. 07</div>
+                </a>
+                <a href="#articulo2" class="index-item">
+                    <div class="index-number">05</div>
+                    <div class="index-title">Implementación Estratégica de Herramientas de Detección</div>
+                    <div class="index-page">Pág. 08</div>
+                </a>
+                <a href="#libro1" class="index-item">
+                    <div class="index-number">06</div>
+                    <div class="index-title">Reseña: Network Intrusion Detection and Prevention</div>
+                    <div class="index-page">Pág. 09</div>
+                </a>
+                <a href="#libro2" class="index-item">
+                    <div class="index-number">07</div>
+                    <div class="index-title">Reseña: Computer Security - Principles and Practice</div>
+                    <div class="index-page">Pág. 10</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Editorial Section -->
+        <section id="editorial" class="section fade-in">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h2 class="card-title">Editorial: La Importancia Crítica de la Detección de Intrusos</h2>
+                </div>
+                
+                <img src="https://staticfiles.acronis.com/images/content/3c77a691d3b8324e18300a730062ea54.png" alt="Gráfico de ciberamenazas" class="card-image">
+                
+                <div class="card-content">
+                    <p>En el panorama digital actual, donde las amenazas cibernéticas evolucionan a una velocidad vertiginosa, la capacidad de detectar y responder a intrusiones de manera eficaz se ha convertido en un <span class="highlight">pilar fundamental de la seguridad informática</span>. Esta primera edición de CYBERDEFENSA CR se enfoca precisamente en las Herramientas de Seguridad para Detección de Intrusos, un tema de vital importancia para individuos, empresas y gobiernos.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-number">75%</div>
+                            <div class="stat-label">Aumento en ciberataques durante 2024</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">$10.5T</div>
+                            <div class="stat-label">Costo global del cibercrimen en 2025</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">89.59%</div>
+                            <div class="stat-label">Reducción de falsos positivos con IA</div>
+                        </div>
+                    </div>
+                    
+                    <p>Para Costa Rica, un país que se posiciona como un <span class="text-gradient">hub tecnológico en Centroamérica</span>, proteger su infraestructura digital no es solo una cuestión de seguridad, sino también de competitividad económica y estabilidad nacional.</p>
+                    
+                    <div class="quote-block">
+                        La detección de intrusos no es solo una tecnología, sino una estrategia integral que requiere inversión en herramientas, procesos y, crucialmente, en el factor humano.
+                    </div>
+                    
+                    <p>En este volumen, exploraremos la evolución de los sistemas de detección y prevención de intrusiones (IDS/IPS), desde sus fundamentos hasta su integración con <span class="highlight">Inteligencia Artificial</span>. Esperamos que esta edición sirva como una guía esencial y una llamada a la acción para fortalecer nuestras defensas cibernéticas en esta era digital.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section id="noticias" class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Noticias de Actualidad</h2>
+                <p class="section-subtitle">Las últimas tendencias y desarrollos críticos en el panorama global de la ciberseguridad</p>
+            </div>
+            
+            <div class="featured-grid">
+                <div id="noticia1" class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h3 class="card-title">Incremento Alarmante: Ciberataques Globales Aumentan 75%</h3>
+                    </div>
+                    
+                    <img src="https://cambiodigital-ol.com/wp-content/uploads/2025/02/Ciberataques.jpg" alt="Gráfico de ciberataques" class="card-image">
+                    
+                    <div class="card-content">
+                        <p>El panorama de la ciberseguridad se ha vuelto más sombrío que nunca, con un <span class="text-gradient">incremento del 75% en los ciberataques globales</span> durante el tercer trimestre de 2024, según revela Check Point Research.</p>
+                        
+                        <p>Los datos son contundentes: se registraron, en promedio, <span class="highlight">1,876 ataques semanales por organización</span>. Alarmantemente, el sector educativo fue el más afectado, sufriendo 3,341 ataques semanales en promedio, evidenciando su vulnerabilidad crítica.</p>
+                        
+                        <div class="quote-block">
+                            El 79% de los ataques de malware no utilizan archivos (fileless malware), dificultando enormemente su detección por métodos tradicionales.
+                        </div>
+                        
+                        <p>El impacto económico es devastador, con un <span class="text-gradient">costo promedio de violación de datos de $4.88 millones</span>. Estas cifras representan no solo pérdidas financieras directas, sino también daños reputacionales, interrupción operativa y costos de recuperación.</p>
+                        
+                        <p class="source">Fuente: Check Point Research (2024)</p>
+                    </div>
+                </div>
+
+                <div id="noticia2" class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3 class="card-title">IA Revoluciona la Detección de Amenazas en 2025</h3>
+                    </div>
+                    
+                    <img src="https://www.canvia.com/wp-content/uploads/2023/02/inteligencia-artificial-para-ciberseguridad-canvia.jpg" alt="IA en ciberseguridad" class="card-image">
+                    
+                    <div class="card-content">
+                        <p>La Inteligencia Artificial está emergiendo como un cambio revolucionario en la detección de amenazas cibernéticas, prometiendo una era de seguridad más robusta y eficiente.</p>
+                        
+                        <p>La <span class="highlight">integración de IA en sistemas IDS puede reducir falsos positivos en un 89.59%</span>, abordando un desafío persistente que tradicionalmente consume recursos valiosos de los equipos de seguridad.</p>
+                        
+                        <div class="stats-container">
+                            <div class="stat-card">
+                                <div class="stat-number">$6.31B</div>
+                                <div class="stat-label">Mercado IDPS en 2024</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">$20.18B</div>
+                                <div class="stat-label">Proyección para 2034</div>
+                            </div>
+                        </div>
+                        
+                        <p>Sin embargo, la misma tecnología genera nuevas preocupaciones. Una encuesta reveló que el <span class="text-gradient">47% de profesionales están "muy preocupados"</span> por el potencial de ataques sofisticados que utilizan IA generativa.</p>
+                        
+                        <p>La IA no solo mejora la precisión en identificación de amenazas, sino que también permite análisis predictivo de comportamientos maliciosos, automatización de respuestas y adaptación dinámica a nuevas variantes de ataques.</p>
+                        
+                        <p class="source">Fuente: Cybersecurity News (2025)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articles Section -->
+        <section id="articulos" class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Artículos Técnicos</h2>
+                <p class="section-subtitle">Análisis profundo de tecnologías y estrategias avanzadas de ciberseguridad</p>
+            </div>
+            
+            <div id="articulo1" class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="card-title">Evolución Tecnológica de los Sistemas IDS/IPS</h3>
+                </div>
+                
+                <img src="https://www.ochobitshacenunbyte.com/wp-content/uploads/2020/09/snort-image-portada-180.jpg" alt="Sistema Snort IDS" class="card-image">
+                
+                <div class="card-content">
+                    <p>Los Sistemas de Detección de Intrusos (IDS) y Sistemas de Prevención de Intrusos (IPS) son componentes cruciales en cualquier arquitectura de ciberseguridad moderna. Aunque frecuentemente mencionados juntos, es fundamental comprender su diferencia clave:</p>
+                    
+                    <div class="quote-block">
+                        <strong>IDS:</strong> Monitorea el tráfico de red en busca de actividad sospechosa y genera alertas.<br><br>
+                        <strong>IPS:</strong> Va un paso más allá al detectar Y bloquear activamente el tráfico malicioso.
+                    </div>
+                    
+                    <p>Históricamente, herramientas como <span class="highlight">Snort</span>, desarrollada por Martin Roesch en 1998, han sido pilares de la detección de intrusiones. Snort es conocido por su arquitectura <em>single-threaded</em>, procesando paquetes secuencialmente. A pesar de esta limitación, ha demostrado una impresionante tasa de detección del <span class="text-gradient">92% al 96%</span> para amenazas conocidas.</p>
+                    
+                    <p>Con el avance de las redes y el aumento del volumen de tráfico, surgieron soluciones más escalables. <span class="highlight">Suricata</span> introdujo capacidades <em>multi-threaded</em>, permitiendo procesamiento paralelo de paquetes, confiriendo una ventaja significativa en entornos de alta velocidad donde Snort podría convertirse en cuello de botella.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-number">92-96%</div>
+                            <div class="stat-label">Tasa de detección de Snort</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">89.59%</div>
+                            <div class="stat-label">Reducción falsos positivos con IA</div>
+                        </div>
+                    </div>
+                    
+                    <p>La innovación más transformadora es la <span class="text-gradient">integración de Inteligencia Artificial</span>. Los sistemas impulsados por IA no solo utilizan firmas para detectar amenazas conocidas, sino que emplean algoritmos de aprendizaje automático para identificar patrones anómalos, incluso en ataques de día cero. Esta capacidad facilita la adaptación automática a nuevas amenazas y la predicción de posibles ataques, llevando la ciberseguridad a un nivel proactivo.</p>
+                </div>
+            </div>
+
+            <div id="articulo2" class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #9333EA 0%, #7C2D12 100%);">
+                        <i class="fas fa-chess-knight"></i>
+                    </div>
+                    <h3 class="card-title">Implementación Estratégica de Herramientas de Detección</h3>
+                </div>
+                
+                <img src="https://dplnews.com/wp-content/uploads/2020/07/dplnews_ciberseguridad_dn310720.png" alt="Estrategia de ciberseguridad" class="card-image">
+                
+                <div class="card-content">
+                    <p>La elección e implementación de herramientas de detección de intrusos debe ser un proceso estratégico, adaptado al tamaño y necesidades específicas de cada organización. No existe una solución única, y la clave reside en equilibrar protección con inversión y recursos disponibles.</p>
+                    
+                    <h4 style="color: var(--primary-blue); margin: 40px 0 24px; font-size: 1.4rem; font-weight: 600;">Pequeñas Empresas</h4>
+                    <p>Para organizaciones con presupuestos limitados pero necesidad crítica de protección, una combinación de herramientas de código abierto puede ser altamente efectiva:</p>
+                    
+                    <div class="code-block">
+• Snort (IDS de red) + OSSEC (HIDS)
+• Inversión inicial: $15,000 - $30,000 USD
+• Equivalente: ₡7.5M - ₡15M colones
+                    </div>
+                    
+                    <h4 style="color: var(--primary-blue); margin: 40px 0 24px; font-size: 1.4rem; font-weight: 600;">Medianas Empresas</h4>
+                    <p>Organizaciones que manejan mayor volumen de tráfico se beneficiarían de herramientas más avanzadas como <span class="highlight">Suricata</span>. Su capacidad multi-threaded y soporte para motores de reglas avanzados lo hacen ideal para entornos de alta velocidad.</p>
+                    
+                    <h4 style="color: var(--primary-blue); margin: 40px 0 24px; font-size: 1.4rem; font-weight: 600;">Métricas Clave de Efectividad</h4>
+                    
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-number">&lt;5%</div>
+                            <div class="stat-label">Falsos positivos objetivo</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">&lt;10min</div>
+                            <div class="stat-label">Tiempo de detección</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">51seg</div>
+                            <div class="stat-label">Récord compromiso total</div>
+                        </div>
+                    </div>
+                    
+                    <div class="quote-block">
+                        El factor humano es crucial: se estima que entre el 20% y 30% del presupuesto de ciberseguridad debería destinarse a capacitación del personal.
+                    </div>
+                    
+                    <p>Un sistema de detección de intrusos es tan efectivo como las personas que lo configuran, monitorean y responden a sus alertas. La inversión en talento y formación continua es indispensable para maximizar el retorno de la inversión en tecnología.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advertisement Sections -->
+        <section class="ad-section fade-in">
+            <h3 class="ad-title">⚡ Dato Curioso: 51 Segundos</h3>
+            <div class="ad-content">
+                <p>Ese es el <strong>tiempo récord</strong> de compromiso total de una red.</p>
+                <ul style="list-style: none; padding: 0; margin: 40px 0; font-size: 1.2rem;">
+                    <li style="margin: 16px 0;">🎯 <strong>0-15 segundos:</strong> Penetración inicial del sistema</li>
+                    <li style="margin: 16px 0;">💀 <strong>Hasta 51 segundos:</strong> Exfiltración completa de datos</li>
+                </ul>
+                <p style="font-size: 2.2rem; margin: 48px 0; font-weight: 700;">¿Tu defensa es lo suficientemente rápida?</p>
+                <p>Una solución <span style="background: rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 50px; font-weight: 600;">IDS/IPS con IA</span> detecta amenazas en <strong>menos de 10 segundos</strong>.</p>
+            </div>
+        </section>
+
+        <section class="ad-section fade-in" style="background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);">
+            <h3 class="ad-title">🛡️ La Paradoja del Ransomware</h3>
+            <div class="ad-content">
+                <p style="font-size: 1.6rem; margin-bottom: 24px;">En 2024, el <strong>64% de las víctimas NO pagaron el rescate</strong></p>
+                <p style="font-size: 1.4rem; margin-bottom: 32px;">El pago promedio bajó de $150,000 a <strong>$115,000</strong></p>
+                <p style="font-size: 2.2rem; margin: 48px 0; font-weight: 700;">¿Por qué? Porque están invirtiendo en <strong>prevención</strong></p>
+                <p style="font-size: 1.4rem;">Es mejor prevenir con <span style="background: rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 50px; font-weight: 600;">IDS/IPS avanzados</span> que pagar un rescate.</p>
+            </div>
+        </section>
+
+        <!-- Book Reviews Section -->
+        <section id="libros" class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Reseñas de Libros</h2>
+                <p class="section-subtitle">Referencias esenciales y lecturas recomendadas para profesionales en ciberseguridad</p>
+            </div>
+            
+            <div id="libro1" class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="card-title">"Network Intrusion Detection and Prevention: Concepts and Techniques"</h3>
+                </div>
+                
+                <div class="book-review">
+                    <div class="book-cover-container">
+                        <img src="https://m.media-amazon.com/images/I/41D-dYQm6HL._UF350,350_QL50_.jpg" alt="Portada del libro Network Intrusion Detection" class="book-cover">
+                    </div>
+                    
+                    <div class="book-info">
+                        <h3>Autores: Ghorbani, Lu, Tavallaee</h3>
+                        <p class="book-meta"><strong>Editorial:</strong> Springer, 2010</p>
+                        
+                        <p>Esta obra, aunque publicada en 2010, sigue siendo un <span class="highlight">referente fundamental</span> para comprender los fundamentos teóricos y prácticos de los Sistemas de Detección y Prevención de Intrusos (IDS/IPS).</p>
+                        
+                        <p>Los autores, expertos reconocidos en seguridad de redes, ofrecen una cobertura exhaustiva desde principios básicos hasta arquitecturas complejas y técnicas de análisis de tráfico.</p>
+                        
+                        <div class="quote-block">
+                            Proporciona una base académica sólida e indispensable para cualquier profesional que desee especializarse en ciberseguridad, particularmente en detección de intrusiones.
+                        </div>
+                        
+                        <p>El libro profundiza en distintos enfoques de detección, como la detección basada en firmas y anomalías, explicando algoritmos y metodologías subyacentes con estudios de caso prácticos.</p>
+                        
+                        <p><strong>Relevancia:</strong> Aunque las tecnologías han evolucionado, los conceptos fundamentales expuestos son atemporales y esenciales para entender las soluciones modernas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="libro2" class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="card-title">"Computer Security: Principles and Practice" 5ta Edición</h3>
+                </div>
+                
+                <div class="book-review">
+                    <div class="book-cover-container">
+                        <img src="https://m.media-amazon.com/images/I/611rLzdxIZL.jpg" alt="Portada Computer Security" class="book-cover">
+                    </div>
+                    
+                    <div class="book-info">
+                        <h3>Autores: William Stallings & Lawrence Brown</h3>
+                        <p class="book-meta"><strong>Editorial:</strong> Pearson, 2023</p>
+                        
+                        <p>La quinta edición de este clásico texto se ha consolidado como <span class="text-gradient">referencia indispensable</span> en cursos universitarios y para profesionales, manteniéndose al día con las últimas tendencias y amenazas.</p>
+                        
+                        <p>Esta actualización incorpora capítulos dedicados a temas emergentes y críticos:</p>
+                        
+                        <ul style="margin: 24px 0; padding-left: 24px; line-height: 1.8;">
+                            <li style="margin: 12px 0;"><span class="highlight">Inteligencia Artificial en seguridad</span></li>
+                            <li style="margin: 12px 0;"><span class="highlight">Arquitectura Zero Trust</span></li>
+                            <li style="margin: 12px 0;"><span class="highlight">Evolución del ransomware</span></li>
+                            <li style="margin: 12px 0;"><span class="highlight">Amenazas Persistentes Avanzadas (APT)</span></li>
+                        </ul>
+                        
+                        <p>Los autores logran explicar conceptos complejos de manera clara y accesible, utilizando ejemplos y casos de estudio que facilitan la comprensión.</p>
+                        
+                        <div class="quote-block">
+                            Ofrece una visión holística de la ciberseguridad, proporcionando tanto principios teóricos como mejores prácticas para aplicación en el mundo real.
+                        </div>
+                        
+                        <p><strong>Valor académico:</strong> Cubre amplia gama de tópicos desde criptografía y seguridad de red hasta gestión de riesgos y seguridad de aplicaciones. Es lectura obligada para comprensión profunda y actualizada de la seguridad informática.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bibliography Section -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Bibliografía</h2>
+                <p class="section-subtitle">Referencias y fuentes consultadas para esta edición especializada</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-content">
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>Check Point Research.</strong> (2024). <em>A closer look at Q3 2024: 75% surge in cyber attacks worldwide</em>. Check Point Software Technologies. 
+                            <a href="https://blog.checkpoint.com/research/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://blog.checkpoint.com/research/</a>
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>CrowdStrike.</strong> (2025). <em>2025 global threat report: Latest cybersecurity trends & insights</em>. CrowdStrike Holdings, Inc.
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>Cybersecurity News.</strong> (2025, enero). <em>Network intrusion detection for emerging 2025 cyber threats</em>.
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>Ghorbani, A. A., Lu, W., & Tavallaee, M.</strong> (2010). <em>Network intrusion detection and prevention: Concepts and techniques</em>. Springer.
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>IBM Security.</strong> (2024). <em>X-Force threat intelligence index 2024</em>. IBM Corporation.
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>Market Data Forecast.</strong> (2024). <em>Intrusion detection and prevention systems market size, 2033</em>.
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>Precedence Research.</strong> (2024). <em>Intrusion detection and prevention systems (IDPS) market size to hit USD 20.18 bn by 2034</em>.
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>Stallings, W., & Brown, L.</strong> (2023). <em>Computer security: Principles and practice</em> (5ta ed.). Pearson.
+                        </li>
+                        <li>
+                            <strong>Verizon.</strong> (2025). <em>2025 data breach investigations report</em>. Verizon Communications Inc.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <h3 class="footer-title">CYBERDEFENSA CR</h3>
+                
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h4>Información de Contacto</h4>
+                        <ul>
+                            <li>Universidad Fidélitas</li>
+                            <li>Llorente de Tibás, San José</li>
+                            <li>Costa Rica</li>
+                            <li><a href="mailto:contacto@cyberdefensacr.com">contacto@cyberdefensacr.com</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Equipo Editorial</h4>
+                        <ul>
+                            <li>Editor en Jefe: José Quirós Chaves</li>
+                            <li>Coordinador de Contenido: José Quirós Chaves</li>
+                            <li>Diseño y Maquetación: José Quirós Chaves</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Misión</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">Promover la conciencia y el conocimiento en ciberseguridad, ofreciendo contenido de alta calidad y relevancia para profesionales, estudiantes y entusiastas del sector en Costa Rica y la región.</p>
+                    </div>
+                </div>
+                
+                <div style="border-top: 1px solid var(--border-glass); padding-top: 48px; margin-top: 60px; text-align: center;">
+                    <p style="color: var(--text-secondary); margin-bottom: 12px;">© Julio 2025 CYBERDEFENSA CR. Publicado por Universidad Fidélitas, San José, Costa Rica.</p>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Todos los derechos reservados. Prohibida la reproducción total o parcial sin autorización.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+            
+            // Initialize navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    navbar.classList.remove('scrolled');
+                    scrollTopBtn.classList.remove('visible');
+                }
+            });
+
+            // Mobile menu functionality
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            navToggle.addEventListener('click', function() {
+                navToggle.classList.toggle('active');
+                navMenu.classList.toggle('mobile-active');
+            });
+
+            // Close mobile menu on link click
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navToggle.classList.remove('active');
+                    navMenu.classList.remove('mobile-active');
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navToggle.classList.remove('active');
+                    navMenu.classList.remove('mobile-active');
+                }
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const offsetTop = target.offsetTop - 100;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -10% 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Active navigation state based on scroll position
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+                
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 150;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Enhanced performance optimizations
+        let ticking = false;
+        
+        function updateOnScroll() {
+            // Batch scroll-dependent updates here
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateOnScroll);
+                ticking = true;
+            }
+        });
+
+        // Preload critical images
+        const criticalImages = [
+            'https://images.pexels.com/photos/5380650/pexels-photo-5380650.jpeg',
+            'https://staticfiles.acronis.com/images/content/3c77a691d3b8324e18300a730062ea54.png'
+        ];
+
+        criticalImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+    </script>
+</body>
+</html>
