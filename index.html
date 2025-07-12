@@ -34,7 +34,15 @@
     <style>
         /* CSS crítico inline para carga inmediata */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { font-size: 14px; }
+        
+        /* SCROLL SUAVE MEJORADO */
+        html { 
+            font-size: 14px; 
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+            overscroll-behavior: contain;
+        }
+        
         body { 
             font-family: Arial, sans-serif; 
             background: #f8fafc; 
@@ -42,7 +50,17 @@
             line-height: 1.4;
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
+            overscroll-behavior-y: contain;
+            scroll-behavior: smooth;
         }
+        
+        /* Contenedor principal con scroll optimizado */
+        .magazine-container {
+            transform: translateZ(0); /* Activar aceleración por hardware */
+            will-change: transform;
+        }
+        
         .loading-screen { 
             position: fixed; 
             top: 0; 
@@ -76,7 +94,6 @@
             border-radius: 5px; 
         }
         .hidden { display: none !important; }
-        .magazine-container { max-width: 100%; margin: 0; background: white; }
         
         /* Estilos mínimos para dispositivos súper pequeños */
         @media (max-width: 240px) {
