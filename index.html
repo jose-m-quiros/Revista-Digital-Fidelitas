@@ -47,6 +47,11 @@
         html {
             scroll-behavior: smooth;
             font-size: 16px;
+            scroll-padding-top: 120px;
+            /* Asegurar que el scroll funcione */
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         body {
@@ -55,10 +60,13 @@
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
+            overflow-y: auto; /* Importante: permitir scroll vertical */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+            height: 100%;
+            position: relative;
         }
 
         body.loaded {
@@ -86,15 +94,16 @@
             50% { transform: translateY(-10px) rotate(0.5deg); }
         }
 
-        /* Glass morphism container */
+        /* Glass morphism container - CORREGIDO PARA SCROLL */
         .magazine-container {
             max-width: 1600px;
             margin: 0 auto;
             background: var(--bg-card);
             box-shadow: var(--shadow-xl);
             border-radius: 0;
-            overflow: hidden;
+            overflow: visible; /* Cambio crítico: era hidden */
             position: relative;
+            min-height: 100vh;
         }
 
         /* Enhanced Navigation */
@@ -376,6 +385,7 @@
         .section {
             padding: 120px 60px;
             position: relative;
+            scroll-margin-top: 100px; /* Para navegación precisa */
         }
 
         .section:nth-child(even) {
@@ -430,6 +440,7 @@
             transition: var(--transition-smooth);
             position: relative;
             overflow: hidden;
+            scroll-margin-top: 120px; /* Para navegación específica a cards */
         }
 
         .card::before {
@@ -779,16 +790,18 @@
             margin-top: 80px;
         }
 
-        /* Advertisement Sections */
+        /* Advertisement Sections - MEJORADAS */
         .ad-section {
             background: var(--gradient-dark);
             color: var(--text-primary);
             text-align: center;
             padding: 120px 80px;
-            margin: 80px 0;
+            margin: 120px 0;
             position: relative;
             overflow: hidden;
             border-radius: 32px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
         }
 
         .ad-section::before {
@@ -799,24 +812,48 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 70%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
             animation: adFloat 20s ease-in-out infinite;
         }
 
+        .ad-section.electric {
+            background: linear-gradient(135deg, #F59E0B 0%, #EF4444 50%, #DC2626 100%);
+        }
+
+        .ad-section.purple {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #EC4899 100%);
+        }
+
         @keyframes adFloat {
-            0%, 100% { transform: translateX(0px) rotate(0deg); }
-            50% { transform: translateX(20px) rotate(1deg); }
+            0%, 100% { transform: translateX(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateX(20px) rotate(1deg); opacity: 1; }
+        }
+
+        .ad-icon {
+            font-size: 4rem;
+            margin-bottom: 24px;
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .ad-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
             margin-bottom: 32px;
             position: relative;
             z-index: 1;
             line-height: 1.1;
+            text-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            letter-spacing: -1px;
         }
 
         .ad-content {
@@ -826,6 +863,58 @@
             margin: 0 auto;
             position: relative;
             z-index: 1;
+        }
+
+        .ad-highlight {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 16px 8px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: var(--transition-smooth);
+        }
+
+        .ad-highlight:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .ad-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin: 48px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ad-stat {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 24px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition-smooth);
+        }
+
+        .ad-stat:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .ad-stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .ad-stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
         }
 
         /* Enhanced Footer */
@@ -1027,6 +1116,39 @@
             .index-title {
                 font-size: 1.1rem;
             }
+
+            .ad-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Estilos específicos para elementos anidados problemáticos */
+        #articulo2, #libro2 {
+            scroll-margin-top: 160px !important;
+            position: relative;
+        }
+        
+        /* Mejorar la visibilidad durante la navegación */
+        #articulo2:target, #libro2:target {
+            animation: highlightTarget 3s ease-in-out;
+        }
+        
+        @keyframes highlightTarget {
+            0% { 
+                background-color: rgba(59, 130, 246, 0.1);
+                transform: scale(1.005);
+                box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+            }
+            50% { 
+                background-color: rgba(59, 130, 246, 0.05);
+                transform: scale(1.002);
+                box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+            }
+            100% { 
+                background-color: transparent;
+                transform: scale(1);
+                box-shadow: none;
+            }
         }
 
         /* Scroll animations */
@@ -1102,10 +1224,10 @@
                 <li><a href="#indice"><i class="fas fa-list"></i> Índice</a></li>
                 <li><a href="#editorial"><i class="fas fa-edit"></i> Editorial</a></li>
                 <li><a href="#noticia1"><i class="fas fa-newspaper"></i> Noticias</a></li>
-                <li><a href="#articulo1"><i class="fas fa-file-alt"></i> Artículos</a></li>
+                <li><a href="#articulos"><i class="fas fa-file-alt"></i> Artículos</a></li>
                 <li><a href="#noticia2"><i class="fas fa-robot"></i> IA 2025</a></li>
-                <li><a href="#anuncio1"><i class="fas fa-bullhorn"></i> Anuncios</a></li>
-                <li><a href="#libro1"><i class="fas fa-book"></i> Reseñas</a></li>
+                <li><a href="#anuncios"><i class="fas fa-bullhorn"></i> Anuncios</a></li>
+                <li><a href="#libros"><i class="fas fa-book"></i> Reseñas</a></li>
                 <li><a href="#bibliografia"><i class="fas fa-graduation-cap"></i> Bibliografía</a></li>
             </ul>
         </div>
@@ -1158,7 +1280,7 @@
                     <div class="index-title">Noticia Relevante I: Incremento Alarmante: Ciberataques Globales Aumentan 75% en 2024</div>
                     <div class="index-page">Pág. 07</div>
                 </a>
-                <a href="#articulo1" class="index-item">
+                <a href="#articulos" class="index-item">
                     <div class="index-number">03</div>
                     <div class="index-title">Artículo I: Evolución Tecnológica de los Sistemas IDS/IPS</div>
                     <div class="index-page">Pág. 08</div>
@@ -1173,22 +1295,22 @@
                     <div class="index-title">Noticia Relevante II: Inteligencia Artificial Revoluciona la Detección de Amenazas en 2025</div>
                     <div class="index-page">Pág. 10</div>
                 </a>
-                <a href="#anuncio1" class="index-item">
+                <a href="#anuncios" class="index-item">
                     <div class="index-number">06</div>
-                    <div class="index-title">Anuncio Publicitario I: Dato Curioso - 51 Segundos</div>
+                    <div class="index-title">Anuncio Publicitario I: Dato Curioso - 51 Segundos: El Tiempo del Terror Digital</div>
                     <div class="index-page">Pág. 11</div>
                 </a>
                 <a href="#anuncio2" class="index-item">
                     <div class="index-number">07</div>
-                    <div class="index-title">Anuncio Publicitario II: Segundo Dato Curioso - La Paradoja del Ransomware</div>
+                    <div class="index-title">Anuncio Publicitario II: La Paradoja del Ransomware Que Cambió Todo</div>
                     <div class="index-page">Pág. 11</div>
                 </a>
-                <a href="#libro1" class="index-item">
+                <a href="#libros" class="index-item">
                     <div class="index-number">08</div>
                     <div class="index-title">Reseña de Libros I: "Network Intrusion Detection and Prevention: Concepts and Techniques"</div>
                     <div class="index-page">Pág. 12</div>
                 </a>
-                <a href="#libro1" class="index-item">
+                <a href="#libro2" class="index-item">
                     <div class="index-number">09</div>
                     <div class="index-title">Reseña de Libros II: "Computer Security: Principles and Practice" 5ta Edición</div>
                     <div class="index-page">Pág. 14</div>
@@ -1297,7 +1419,7 @@
         </section>
 
         <!-- Articles Section -->
-        <section id="articulo1" class="section fade-in">
+        <section id="articulos" class="section fade-in">
             <div class="section-header">
                 <h2 class="section-title">Artículo I</h2>
                 <p class="section-subtitle">Evolución Tecnológica de los Sistemas IDS/IPS</p>
@@ -1448,23 +1570,48 @@
             </div>
         </section>
 
-        <!-- Advertisement Sections -->
-        <section id="anuncio1" class="section fade-in">
+        <!-- Advertisement Sections - MEJORADAS -->
+        <section id="anuncios" class="section fade-in">
             <div class="section-header">
                 <h2 class="section-title">Anuncio Publicitario I</h2>
-                <p class="section-subtitle">Primer dato curioso sobre velocidad de ataques cibernéticos</p>
+                <p class="section-subtitle">Dato Curioso sobre la velocidad crítica de los ciberataques modernos</p>
             </div>
             
-            <div class="ad-section">
-                <h3 class="ad-title">⚡ Dato Curioso: 51 Segundos</h3>
+            <div class="ad-section electric">
+                <div class="ad-icon">⚡</div>
+                <h3 class="ad-title">51 SEGUNDOS</h3>
                 <div class="ad-content">
-                    <p>Ese es el <strong>tiempo récord</strong> de compromiso total de una red.</p>
-                    <ul style="list-style: none; padding: 0; margin: 40px 0; font-size: 1.2rem;">
-                        <li style="margin: 16px 0;">🎯 <strong>0-15 segundos:</strong> Penetración inicial del sistema</li>
-                        <li style="margin: 16px 0;">💀 <strong>Hasta 51 segundos:</strong> Exfiltración completa de datos</li>
-                    </ul>
-                    <p style="font-size: 2.2rem; margin: 48px 0; font-weight: 700;">¿Tu defensa es lo suficientemente rápida?</p>
-                    <p>Una solución <span style="background: rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 50px; font-weight: 600;">IDS/IPS con IA</span> detecta amenazas en <strong>menos de 10 segundos</strong>.</p>
+                    <p style="font-size: 1.8rem; margin-bottom: 32px; font-weight: 600;">
+                        El tiempo récord para <strong>comprometer completamente una red empresarial</strong>
+                    </p>
+                    
+                    <div class="ad-stats">
+                        <div class="ad-stat">
+                            <div class="ad-stat-number">0-15s</div>
+                            <div class="ad-stat-label">Penetración inicial del sistema</div>
+                        </div>
+                        <div class="ad-stat">
+                            <div class="ad-stat-number">16-35s</div>
+                            <div class="ad-stat-label">Escalación de privilegios</div>
+                        </div>
+                        <div class="ad-stat">
+                            <div class="ad-stat-number">36-51s</div>
+                            <div class="ad-stat-label">Exfiltración completa de datos</div>
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 2rem; margin: 48px 0; font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                        ¿Tu defensa es lo suficientemente <span class="ad-highlight">RÁPIDA</span>?
+                    </p>
+                    
+                    <p style="font-size: 1.6rem;">
+                        Los sistemas <span class="ad-highlight">IDS/IPS con IA</span> detectan amenazas en 
+                        <strong style="font-size: 2.2rem; display: block; margin: 16px 0;">menos de 10 segundos</strong>
+                    </p>
+                    
+                    <p style="font-size: 1.2rem; margin-top: 40px; opacity: 0.9;">
+                        <strong>No esperes a ser víctima.</strong> La velocidad de respuesta marca la diferencia entre un incidente menor y una catástrofe empresarial.
+                    </p>
                 </div>
             </div>
         </section>
@@ -1472,22 +1619,55 @@
         <section id="anuncio2" class="section fade-in">
             <div class="section-header">
                 <h2 class="section-title">Anuncio Publicitario II</h2>
-                <p class="section-subtitle">Segundo dato curioso sobre la paradoja del ransomware</p>
+                <p class="section-subtitle">La paradoja del ransomware que está cambiando el panorama de la ciberseguridad</p>
             </div>
             
-            <div class="ad-section" style="background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);">
-                <h3 class="ad-title">🛡️ La Paradoja del Ransomware</h3>
+            <div class="ad-section purple">
+                <div class="ad-icon">🛡️</div>
+                <h3 class="ad-title">LA PARADOJA DEL RANSOMWARE</h3>
                 <div class="ad-content">
-                    <p style="font-size: 1.6rem; margin-bottom: 24px;">En 2024, el <strong>64% de las víctimas NO pagaron el rescate</strong></p>
-                    <p style="font-size: 1.4rem; margin-bottom: 32px;">El pago promedio bajó de $150,000 a <strong>$115,000</strong></p>
-                    <p style="font-size: 2.2rem; margin: 48px 0; font-weight: 700;">¿Por qué? Porque están invirtiendo en <strong>prevención</strong></p>
-                    <p style="font-size: 1.4rem;">Es mejor prevenir con <span style="background: rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 50px; font-weight: 600;">IDS/IPS avanzados</span> que pagar un rescate.</p>
+                    <p style="font-size: 1.8rem; margin-bottom: 24px; font-weight: 600;">
+                        En 2024, algo extraordinario sucedió:
+                    </p>
+                    
+                    <div class="ad-stats">
+                        <div class="ad-stat">
+                            <div class="ad-stat-number">64%</div>
+                            <div class="ad-stat-label">de las víctimas NO pagaron el rescate</div>
+                        </div>
+                        <div class="ad-stat">
+                            <div class="ad-stat-number">$150K → $115K</div>
+                            <div class="ad-stat-label">Disminución del pago promedio</div>
+                        </div>
+                        <div class="ad-stat">
+                            <div class="ad-stat-number">85%</div>
+                            <div class="ad-stat-label">Invirtió en sistemas preventivos</div>
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 2.4rem; margin: 48px 0; font-weight: 800; line-height: 1.2;">
+                        ¿Por qué? Porque descubrieron que es mejor 
+                        <span class="ad-highlight">PREVENIR</span> que pagar
+                    </p>
+                    
+                    <p style="font-size: 1.6rem; margin-bottom: 32px;">
+                        Las empresas inteligentes están invirtiendo en <span class="ad-highlight">IDS/IPS avanzados</span> 
+                        en lugar de fondos de emergencia para ransomware.
+                    </p>
+                    
+                    <p style="font-size: 1.4rem; font-weight: 600; background: rgba(255,255,255,0.15); padding: 24px; border-radius: 16px; margin-top: 40px;">
+                        <strong>Resultado:</strong> 89% menos incidentes, 95% menos pérdidas financieras, y 100% más tranquilidad.
+                    </p>
+                    
+                    <p style="font-size: 1.2rem; margin-top: 32px; opacity: 0.9;">
+                        La nueva regla de oro: <strong>Un dólar en prevención vale más que mil en recuperación.</strong>
+                    </p>
                 </div>
             </div>
         </section>
 
         <!-- Book Reviews Section -->
-        <section id="libro1" class="section fade-in">
+        <section id="libros" class="section fade-in">
             <div class="section-header">
                 <h2 class="section-title">Reseña de Libros I</h2>
                 <p class="section-subtitle">"Network Intrusion Detection and Prevention: Concepts and Techniques"</p>
@@ -1729,17 +1909,67 @@
                 });
             }
 
-            // Smooth scrolling for navigation links
+            // Smooth scrolling for navigation links - LIMPIO Y FUNCIONAL
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    
                     if (target) {
-                        const offsetTop = target.offsetTop - 100;
+                        // Cálculo específico del offset según el tipo de elemento
+                        let offsetTop;
+                        
+                        // Para elementos específicos que están anidados
+                        if (targetId === '#articulo2' || targetId === '#libro2') {
+                            offsetTop = target.offsetTop - 160;
+                        } else {
+                            offsetTop = target.offsetTop - 120;
+                        }
+                        
+                        // Asegurar que no scroll negativo
+                        offsetTop = Math.max(0, offsetTop);
+                        
+                        // Scroll suave principal
                         window.scrollTo({
                             top: offsetTop,
+                            left: 0,
                             behavior: 'smooth'
                         });
+                        
+                        // Verificar si el scroll funcionó y usar fallback si es necesario
+                        setTimeout(() => {
+                            const scrollActual = window.scrollY;
+                            
+                            // Si no se movió lo suficiente, usar scroll instantáneo como fallback
+                            if (Math.abs(scrollActual - offsetTop) > 50) {
+                                window.scrollTo(0, offsetTop);
+                                
+                                // Si aún no funciona, usar scrollIntoView
+                                setTimeout(() => {
+                                    const scrollDespues = window.scrollY;
+                                    if (Math.abs(scrollDespues - offsetTop) > 50) {
+                                        target.scrollIntoView({
+                                            behavior: 'smooth',
+                                            block: 'start',
+                                            inline: 'nearest'
+                                        });
+                                    }
+                                }, 100);
+                            }
+                        }, 800);
+                        
+                        // Highlight temporal del elemento
+                        target.style.transition = 'all 0.5s ease';
+                        target.style.backgroundColor = 'rgba(59, 130, 246, 0.08)';
+                        target.style.transform = 'scale(1.005)';
+                        target.style.boxShadow = '0 8px 32px rgba(59, 130, 246, 0.2)';
+                        
+                        setTimeout(() => {
+                            target.style.backgroundColor = '';
+                            target.style.transform = '';
+                            target.style.boxShadow = '';
+                        }, 1500);
                     }
                 });
             });
@@ -1762,23 +1992,35 @@
                 observer.observe(el);
             });
 
-            // Active navigation state based on scroll position
+            // Improved active navigation state based on scroll position
             window.addEventListener('scroll', function() {
-                const sections = document.querySelectorAll('section[id]');
+                const sections = document.querySelectorAll('section[id], .card[id]');
                 const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
                 
                 let current = '';
+                const scrollPosition = window.scrollY + 200;
+                
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 150;
+                    const sectionTop = section.offsetTop;
                     const sectionHeight = section.clientHeight;
-                    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                        current = section.getAttribute('id');
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = sectionId;
+                        
+                        // Para elementos anidados, usar el padre para la navegación activa
+                        if (sectionId === 'articulo2') {
+                            current = 'articulos';
+                        } else if (sectionId === 'libro2') {
+                            current = 'libros';
+                        }
                     }
                 });
 
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === '#' + current) {
+                    const href = link.getAttribute('href').substring(1);
+                    if (href === current) {
                         link.classList.add('active');
                     }
                 });
@@ -1818,11 +2060,6 @@
             const img = new Image();
             img.src = src;
         });
-
-        // Add easter egg for developers
-        console.log('%c🛡️ CYBERDEFENSA CR - Revista Digital', 'color: #0066ff; font-size: 20px; font-weight: bold;');
-        console.log('%c💡 Desarrollado por Jose Manuel Quiros Chaves', 'color: #00d4ff; font-size: 14px;');
-        console.log('%c🎓 Universidad Fidélitas - 2025', 'color: #8B5CF6; font-size: 12px;');
     </script>
 </body>
 </html>
