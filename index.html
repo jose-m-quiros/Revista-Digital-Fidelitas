@@ -13,6 +13,9 @@
             --accent-electric: #3B82F6;
             --accent-cyan: #06B6D4;
             --accent-purple: #8B5CF6;
+            --accent-emerald: #10B981;
+            --accent-orange: #F59E0B;
+            --accent-rose: #EC4899;
             --text-primary: #FFFFFF;
             --text-secondary: #CBD5E1;
             --text-dark: #1E293B;
@@ -54,6 +57,12 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
         }
 
         /* Animated Mesh Background */
@@ -147,7 +156,7 @@
             color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
-            padding: 12px 24px;
+            padding: 12px 20px;
             border-radius: 50px;
             transition: var(--transition-smooth);
             position: relative;
@@ -415,7 +424,7 @@
             background: var(--bg-card);
             border-radius: 32px;
             padding: 60px;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-light);
             transition: var(--transition-smooth);
@@ -465,6 +474,11 @@
             color: white;
             font-size: 1.5rem;
             box-shadow: var(--shadow-sm);
+            transition: var(--transition-smooth);
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .card-title {
@@ -554,6 +568,11 @@
             justify-content: center;
             font-weight: 700;
             font-size: 1.1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .index-item:hover .index-number {
+            transform: scale(1.1) rotate(-5deg);
         }
 
         .index-title {
@@ -733,6 +752,14 @@
             margin-bottom: 16px;
             color: var(--text-dark);
             line-height: 1.2;
+        }
+
+        .book-info h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--primary-blue);
+            margin: 24px 0 16px;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
         .book-meta {
@@ -984,6 +1011,22 @@
             .section-header {
                 margin-bottom: 60px;
             }
+
+            .index-item {
+                grid-template-columns: 40px 1fr auto;
+                gap: 16px;
+                padding: 24px;
+            }
+
+            .index-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .index-title {
+                font-size: 1.1rem;
+            }
         }
 
         /* Scroll animations */
@@ -1037,16 +1080,6 @@
             background: var(--bg-glass);
             transform: translateX(8px);
         }
-
-        /* Loading states */
-        body {
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        body.loaded {
-            opacity: 1;
-        }
     </style>
 </head>
 <body>
@@ -1068,11 +1101,12 @@
                 <li><a href="#hero"><i class="fas fa-home"></i> Inicio</a></li>
                 <li><a href="#indice"><i class="fas fa-list"></i> Índice</a></li>
                 <li><a href="#editorial"><i class="fas fa-edit"></i> Editorial</a></li>
-                <li><a href="#noticias"><i class="fas fa-newspaper"></i> Noticias</a></li>
-                <li><a href="#articulos"><i class="fas fa-file-alt"></i> Artículos</a></li>
+                <li><a href="#noticia1"><i class="fas fa-newspaper"></i> Noticias</a></li>
+                <li><a href="#articulo1"><i class="fas fa-file-alt"></i> Artículos</a></li>
                 <li><a href="#noticia2"><i class="fas fa-robot"></i> IA 2025</a></li>
-                <li><a href="#libros"><i class="fas fa-book"></i> Reseñas</a></li>
+                <li><a href="#libro1"><i class="fas fa-book"></i> Reseñas</a></li>
                 <li><a href="#bibliografia"><i class="fas fa-graduation-cap"></i> Bibliografía</a></li>
+                <li><a href="#anuncio"><i class="fas fa-bullhorn"></i> Anuncio</a></li>
             </ul>
         </div>
     </nav>
@@ -1106,105 +1140,6 @@
             </div>
         </section>
 
-        <!-- Bibliography Section -->
-        <section id="bibliografia" class="section fade-in">
-            <div class="section-header">
-                <h2 class="section-title">Bibliografía</h2>
-                <p class="section-subtitle">Referencias y fuentes consultadas para esta edición especializada</p>
-            </div>
-            
-            <div class="card">
-                <div class="card-content">
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
-                            <strong>Check Point Research.</strong> (2024). <em>A closer look at Q3 2024: 75% surge in cyber attacks worldwide</em>. Check Point Software Technologies. 
-                            <a href="https://blog.checkpoint.com/research/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://blog.checkpoint.com/research/</a>
-                        </li>
-                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
-                            <strong>CrowdStrike.</strong> (2025). <em>2025 global threat report: Latest cybersecurity trends & insights</em>. CrowdStrike Holdings, Inc. 
-                            <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://www.crowdstrike.com/global-threat-report/</a>
-                        </li>
-                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
-                            <strong>Cybersecurity News.</strong> (2025, enero). <em>Network intrusion detection for emerging 2025 cyber threats</em>. 
-                            <a href="https://cybersecuritynews.com/network-intrusion-detection/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://cybersecuritynews.com/network-intrusion-detection/</a>
-                        </li>
-                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
-                            <strong>Ghorbani, A. A., Lu, W., & Tavallaee, M.</strong> (2010). <em>Network intrusion detection and prevention: Concepts and techniques</em>. Springer. 
-                            <a href="https://doi.org/10.1007/978-0-387-88771-5" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://doi.org/10.1007/978-0-387-88771-5</a>
-                        </li>
-                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
-                            <strong>IBM Security.</strong> (2024). <em>X-Force threat intelligence index 2024</em>. IBM Corporation. 
-                            <a href="https://www.ibm.com/x-force" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://www.ibm.com/x-force</a>
-                        </li>
-                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
-                            <strong>Market Data Forecast.</strong> (2024). <em>Intrusion detection and prevention systems market size, 2033</em>. 
-                            <a href="https://www.marketdataforecast.com/market-reports/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://www.marketdataforecast.com/market-reports/</a>
-                        </li>
-                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
-                            <strong>NordLayer.</strong> (2024). <em>Cybersecurity statistics 2024: Key insights and numbers</em>. 
-                            <a href="https://nordlayer.com/blog/cybersecurity-statistics-2024/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://nordlayer.com/blog/cybersecurity-statistics-2024/</a>
-                        </li>
-                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
-                            <strong>Precedence Research.</strong> (2024). <em>Intrusion detection and prevention systems (IDPS) market size to hit USD 20.18 bn by 2034</em>. 
-                            <a href="https://www.precedenceresearch.com/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://www.precedenceresearch.com/</a>
-                        </li>
-                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
-                            <strong>Stallings, W., & Brown, L.</strong> (2023). <em>Computer security: Principles and practice</em> (5ta ed.). Pearson.
-                        </li>
-                        <li>
-                            <strong>Verizon.</strong> (2025). <em>2025 data breach investigations report</em>. Verizon Communications Inc. 
-                            <a href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://www.verizon.com/business/resources/reports/dbir/</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        <!-- Second News Section -->
-        <section id="noticia2" class="section fade-in">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon" style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3 class="card-title">Inteligencia Artificial Revoluciona la Detección de Amenazas en 2025</h3>
-                </div>
-                
-                <img src="https://www.canvia.com/wp-content/uploads/2023/02/inteligencia-artificial-para-ciberseguridad-canvia.jpg" alt="IA en ciberseguridad" class="card-image">
-                
-                <div class="card-content">
-                    <p><strong>Fecha: Enero 2025</strong></p>
-                    
-                    <p>La integración masiva de inteligencia artificial en sistemas de detección de intrusos marca un <span class="text-gradient">punto de inflexión en la ciberseguridad empresarial</span>. Según el reporte "Network Intrusion Detection for Emerging 2025 Cyber Threats" publicado por Cybersecurity News, las organizaciones que implementan IA avanzada en sus sistemas IDS/IPS reportan una reducción del 89.59% en falsos positivos, transformando radicalmente la eficiencia operacional de los centros de operaciones de seguridad (SOC).</p>
-                    
-                    <div class="quote-block">
-                        El desarrollo más significativo es la introducción de "environmental awareness" en los algoritmos de detección. Estos sistemas aprenden continuamente los patrones normales de comportamiento específicos de cada red, adaptándose dinámicamente a cambios legítimos mientras identifican anomalías sutiles.
-                    </div>
-                    
-                    <p>Esta capacidad es crucial cuando el <span class="highlight">79% de los ataques actuales utilizan técnicas "living-off-the-land"</span> que explotan herramientas legítimas del sistema.</p>
-                    
-                    <div class="stats-container">
-                        <div class="stat-card">
-                            <div class="stat-number">$6.31B</div>
-                            <div class="stat-label">Mercado IDPS 2024</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">$20.18B</div>
-                            <div class="stat-label">Proyección 2034</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">12.3%</div>
-                            <div class="stat-label">Crecimiento anual compuesto</div>
-                        </div>
-                    </div>
-                    
-                    <p>Las proyecciones del mercado reflejan esta transformación tecnológica. El sector global de sistemas IDPS alcanzó $6.31 mil millones en 2024 y se proyecta que llegará a $20.18 mil millones para 2034, con un crecimiento anual compuesto del 12.3%. Esta expansión está impulsada principalmente por la adopción de soluciones cloud-native que ofrecen escalabilidad infinita y capacidades de aprendizaje global.</p>
-                    
-                    <p>Sin embargo, los desafíos persisten. El <span class="text-gradient">47% de las organizaciones citan los ataques potenciados por IA generativa</span> como su principal preocupación para 2025. Los atacantes utilizan la misma tecnología para crear malware polimórfico que muta en tiempo real, evadiendo detecciones basadas en firmas tradicionales. Esta carrera armamentista tecnológica requiere inversión continua en investigación y desarrollo para mantener la ventaja defensiva.</p>
-                    
-                    <p class="source">Fuente: Cybersecurity News - Network Intrusion Detection Report 2025</p>
-                </div>
-            </div>
-
         <!-- Index Section -->
         <section id="indice" class="section fade-in">
             <div class="section-header">
@@ -1216,42 +1151,34 @@
                 <a href="#editorial" class="index-item">
                     <div class="index-number">01</div>
                     <div class="index-title">Editorial: La Importancia Crítica de la Ciberseguridad y la Detección de Intrusos</div>
-                    <div class="index-page">Pág. 04</div>
                 </a>
                 <a href="#noticia1" class="index-item">
                     <div class="index-number">02</div>
-                    <div class="index-title">Incremento Alarmante: Ciberataques Globales Aumentan 75% en 2024</div>
-                    <div class="index-page">Pág. 05</div>
+                    <div class="index-title">Noticia Relevante I: Incremento Alarmante: Ciberataques Globales Aumentan 75% en 2024</div>
                 </a>
                 <a href="#articulo1" class="index-item">
                     <div class="index-number">03</div>
-                    <div class="index-title">Evolución Tecnológica de los Sistemas IDS/IPS</div>
-                    <div class="index-page">Pág. 06</div>
+                    <div class="index-title">Artículo I: Evolución Tecnológica de los Sistemas IDS/IPS</div>
                 </a>
                 <a href="#articulo2" class="index-item">
                     <div class="index-number">04</div>
-                    <div class="index-title">Implementación Estratégica de Herramientas de Detección</div>
-                    <div class="index-page">Pág. 07</div>
+                    <div class="index-title">Artículo II: Implementación Estratégica de Herramientas de Detección</div>
                 </a>
                 <a href="#noticia2" class="index-item">
                     <div class="index-number">05</div>
-                    <div class="index-title">Inteligencia Artificial Revoluciona la Detección de Amenazas en 2025</div>
-                    <div class="index-page">Pág. 08</div>
+                    <div class="index-title">Noticia Relevante II: Inteligencia Artificial Revoluciona la Detección de Amenazas en 2025</div>
                 </a>
                 <a href="#libro1" class="index-item">
                     <div class="index-number">06</div>
-                    <div class="index-title">Reseña: "Network Intrusion Detection and Prevention: Concepts and Techniques"</div>
-                    <div class="index-page">Pág. 09</div>
+                    <div class="index-title">Reseña de Libros I: "Network Intrusion Detection and Prevention: Concepts and Techniques"</div>
                 </a>
-                <a href="#libro2" class="index-item">
+                <a href="#libro1" class="index-item">
                     <div class="index-number">07</div>
-                    <div class="index-title">Reseña: "Computer Security: Principles and Practice" 5ta Edición</div>
-                    <div class="index-page">Pág. 10</div>
+                    <div class="index-title">Reseña de Libros II: "Computer Security: Principles and Practice" 5ta Edición</div>
                 </a>
                 <a href="#bibliografia" class="index-item">
                     <div class="index-number">08</div>
                     <div class="index-title">Bibliografía</div>
-                    <div class="index-page">Pág. 11</div>
                 </a>
             </div>
         </section>
@@ -1263,7 +1190,7 @@
                     <div class="card-icon">
                         <i class="fas fa-edit"></i>
                     </div>
-                    <h2 class="card-title">Editorial: La Importancia Crítica de la Detección de Intrusos</h2>
+                    <h2 class="card-title">Editorial: La Importancia Crítica de la Ciberseguridad y la Detección de Intrusos</h2>
                 </div>
                 
                 <img src="https://staticfiles.acronis.com/images/content/3c77a691d3b8324e18300a730062ea54.png" alt="Gráfico de ciberamenazas" class="card-image">
@@ -1300,13 +1227,13 @@
         </section>
 
         <!-- News Section -->
-        <section id="noticias" class="section fade-in">
+        <section id="noticia1" class="section fade-in">
             <div class="section-header">
-                <h2 class="section-title">Noticias de Actualidad</h2>
-                <p class="section-subtitle">Las últimas tendencias y desarrollos críticos en el panorama global de la ciberseguridad</p>
+                <h2 class="section-title">Noticia Relevante I</h2>
+                <p class="section-subtitle">Incremento alarmante en la actividad cibercriminal global durante 2024</p>
             </div>
             
-            <div id="noticia1" class="card">
+            <div class="card">
                 <div class="card-header">
                     <div class="card-icon" style="background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);">
                         <i class="fas fa-exclamation-triangle"></i>
@@ -1336,7 +1263,7 @@
                         </div>
                     </div>
                     
-                    <p>El sector educativo lidera tristemente las estadísticas con <span class="highlight">3,341 ataques semanales por organización</span>, un incremento del 53% año tras año. Le siguen el sector gubernamental/militar con 2,084 ataques semanales y el sector salud con 1,999 ataques semanales.</p>
+                    <p>El sector educativo lidera tristemente las estadísticas con <span class="highlight">3,341 ataques semanales por organización</span>, un incremento del 53% año tras año. Le siguen el sector gubernamental/militar con 2,084 ataques semanales y el sector salud con 1,999 ataques semanales. Estos números no son meras estadísticas; representan intentos reales de comprometer información sensible, interrumpir operaciones críticas y extorsionar a instituciones vitales para la sociedad.</p>
                     
                     <div class="quote-block">
                         La sofisticación de los ataques también ha evolucionado significativamente. El 79% de las detecciones en 2024 correspondieron a malware sin archivos, utilizando técnicas "living-off-the-land" que explotan herramientas legítimas del sistema operativo.
@@ -1352,13 +1279,13 @@
         </section>
 
         <!-- Articles Section -->
-        <section id="articulos" class="section fade-in">
+        <section id="articulo1" class="section fade-in">
             <div class="section-header">
-                <h2 class="section-title">Artículos Técnicos</h2>
-                <p class="section-subtitle">Análisis profundo de tecnologías y estrategias avanzadas de ciberseguridad</p>
+                <h2 class="section-title">Artículo I</h2>
+                <p class="section-subtitle">Evolución Tecnológica de los Sistemas IDS/IPS</p>
             </div>
             
-            <div id="articulo1" class="card">
+            <div class="card">
                 <div class="card-header">
                     <div class="card-icon" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);">
                         <i class="fas fa-cogs"></i>
@@ -1456,6 +1383,53 @@
             </div>
         </section>
 
+        <!-- Second News Section -->
+        <section id="noticia2" class="section fade-in">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="card-title">Inteligencia Artificial Revoluciona la Detección de Amenazas en 2025</h3>
+                </div>
+                
+                <img src="https://www.canvia.com/wp-content/uploads/2023/02/inteligencia-artificial-para-ciberseguridad-canvia.jpg" alt="IA en ciberseguridad" class="card-image">
+                
+                <div class="card-content">
+                    <p><strong>Fecha: Enero 2025</strong></p>
+                    
+                    <p>La integración masiva de inteligencia artificial en sistemas de detección de intrusos marca un <span class="text-gradient">punto de inflexión en la ciberseguridad empresarial</span>. Según el reporte "Network Intrusion Detection for Emerging 2025 Cyber Threats" publicado por Cybersecurity News, las organizaciones que implementan IA avanzada en sus sistemas IDS/IPS reportan una reducción del 89.59% en falsos positivos, transformando radicalmente la eficiencia operacional de los centros de operaciones de seguridad (SOC).</p>
+                    
+                    <div class="quote-block">
+                        El desarrollo más significativo es la introducción de "environmental awareness" en los algoritmos de detección. Estos sistemas aprenden continuamente los patrones normales de comportamiento específicos de cada red, adaptándose dinámicamente a cambios legítimos mientras identifican anomalías sutiles.
+                    </div>
+                    
+                    <p>Esta capacidad es crucial cuando el <span class="highlight">79% de los ataques actuales utilizan técnicas "living-off-the-land"</span> que explotan herramientas legítimas del sistema.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-number">$6.31B</div>
+                            <div class="stat-label">Mercado IDPS 2024</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">$20.18B</div>
+                            <div class="stat-label">Proyección 2034</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">12.3%</div>
+                            <div class="stat-label">Crecimiento anual compuesto</div>
+                        </div>
+                    </div>
+                    
+                    <p>Las proyecciones del mercado reflejan esta transformación tecnológica. El sector global de sistemas IDPS alcanzó $6.31 mil millones en 2024 y se proyecta que llegará a $20.18 mil millones para 2034, con un crecimiento anual compuesto del 12.3%. Esta expansión está impulsada principalmente por la adopción de soluciones cloud-native que ofrecen escalabilidad infinita y capacidades de aprendizaje global.</p>
+                    
+                    <p>Sin embargo, los desafíos persisten. El <span class="text-gradient">47% de las organizaciones citan los ataques potenciados por IA generativa</span> como su principal preocupación para 2025. Los atacantes utilizan la misma tecnología para crear malware polimórfico que muta en tiempo real, evadiendo detecciones basadas en firmas tradicionales. Esta carrera armamentista tecnológica requiere inversión continua en investigación y desarrollo para mantener la ventaja defensiva.</p>
+                    
+                    <p class="source">Fuente: Cybersecurity News - Network Intrusion Detection Report 2025</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Advertisement Sections -->
         <section class="ad-section fade-in">
             <h3 class="ad-title">⚡ Dato Curioso: 51 Segundos</h3>
@@ -1481,13 +1455,13 @@
         </section>
 
         <!-- Book Reviews Section -->
-        <section id="libros" class="section fade-in">
+        <section id="libro1" class="section fade-in">
             <div class="section-header">
-                <h2 class="section-title">Reseñas de Libros</h2>
-                <p class="section-subtitle">Referencias esenciales y lecturas recomendadas para profesionales en ciberseguridad</p>
+                <h2 class="section-title">Reseña de Libros</h2>
+                <p class="section-subtitle">"Network Intrusion Detection and Prevention: Concepts and Techniques"</p>
             </div>
             
-            <div id="libro1" class="card">
+            <div class="card">
                 <div class="card-header">
                     <div class="card-icon" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
                         <i class="fas fa-book-open"></i>
@@ -1504,31 +1478,33 @@
                         <h3>Autores: Ali A. Ghorbani, Wei Lu, Mahbod Tavallaee</h3>
                         <p class="book-meta"><strong>Editorial:</strong> Springer | <strong>Año:</strong> 2010 | <strong>ISBN:</strong> 978-0-387-88771-5 | <strong>Páginas:</strong> 292</p>
                         
-                        <h4 style="color: var(--primary-blue); margin: 24px 0 16px; font-size: 1.2rem;">Resumen General</h4>
+                        <h4>Resumen General</h4>
                         <p>Esta obra fundamental constituye la <span class="highlight">referencia académica más completa sobre sistemas de detección de intrusos</span> disponible en la literatura especializada. Los autores, reconocidos investigadores de la Universidad de New Brunswick, presentan un análisis exhaustivo que abarca desde los fundamentos teóricos hasta las implementaciones prácticas más avanzadas.</p>
                         
-                        <h4 style="color: var(--primary-blue); margin: 24px 0 16px; font-size: 1.2rem;">Estructura y Contenido</h4>
+                        <h4>Estructura y Contenido</h4>
                         <p>El libro se estructura en tres secciones principales. La primera establece los fundamentos conceptuales, definiendo taxonomías de ataques y metodologías de detección. Destaca especialmente el capítulo sobre detección basada en anomalías, donde se exploran algoritmos estadísticos y de machine learning aplicables a la identificación de comportamientos anómalos.</p>
                         
                         <div class="quote-block">
                             La segunda sección profundiza en arquitecturas de sistemas IDS/IPS, comparando soluciones comerciales y open-source con criterios técnicos objetivos. La tercera parte aborda la evaluación y métricas de rendimiento, proporcionando frameworks para medir efectividad real en entornos productivos.
                         </div>
                         
-                        <h4 style="color: var(--primary-blue); margin: 24px 0 16px; font-size: 1.2rem;">Relevancia Académica</h4>
+                        <h4>Relevancia Académica</h4>
                         <p>El texto es particularmente valioso por su enfoque equilibrado entre teoría y práctica. Los autores no solo presentan conceptos abstractos, sino que incluyen casos de estudio detallados y ejemplos de implementación. El capítulo sobre evaluación de sistemas IDS es especialmente relevante, proporcionando <span class="text-gradient">metodologías reproducibles para comparar diferentes herramientas objetivamente</span>.</p>
                         
-                        <h4 style="color: var(--primary-blue); margin: 24px 0 16px; font-size: 1.2rem;">Valoración</h4>
+                        <h4>Aplicabilidad</h4>
+                        <p>Para estudiantes de tecnología e informática, este libro ofrece la base teórica necesaria para comprender el funcionamiento interno de herramientas como Snort y Suricata. Los ejercicios prácticos al final de cada capítulo refuerzan el aprendizaje, mientras que las referencias bibliográficas extensas facilitan la investigación adicional.</p>
+                        
+                        <h4>Valoración</h4>
                         <p><strong>Indispensable</strong> para cualquier profesional o estudiante serio sobre seguridad informática. Aunque publicado en 2010, los principios fundamentales permanecen vigentes, complementándose perfectamente con recursos más recientes sobre IA y machine learning en detección de intrusos. La claridad expositiva y profundidad técnica lo convierten en texto de referencia obligada.</p>
                     </div>
                 </div>
             </div>
-
-            <div id="libro2" class="card">
+            <div class="card">
                 <div class="card-header">
                     <div class="card-icon" style="background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h3 class="card-title">"Computer Security: Principles and Practice" 5ta Edición</h3>
+                    <h3 class="card-title">Reseña de Libros II: "Computer Security: Principles and Practice" 5ta Edición</h3>
                 </div>
                 
                 <div class="book-review">
@@ -1540,28 +1516,83 @@
                         <h3>Autores: William Stallings, Lawrie Brown</h3>
                         <p class="book-meta"><strong>Editorial:</strong> Pearson | <strong>Año:</strong> 2023 | <strong>ISBN:</strong> 978-0-13-5773932 | <strong>Páginas:</strong> 816</p>
                         
-                        <h4 style="color: var(--primary-blue); margin: 24px 0 16px; font-size: 1.2rem;">Visión General</h4>
+                        <h4>Visión General</h4>
                         <p>La quinta edición de este texto clásico representa una <span class="highlight">actualización significativa que incorpora las tendencias más recientes en ciberseguridad</span>, incluyendo capítulos completamente nuevos sobre ransomware, arquitecturas Zero Trust, y detección de amenazas basada en inteligencia artificial. Stallings y Brown han creado un recurso educativo que balancea magistralmente la profundidad técnica con la accesibilidad pedagógica.</p>
                         
-                        <h4 style="color: var(--primary-blue); margin: 24px 0 16px; font-size: 1.2rem;">Organización del Contenido</h4>
+                        <h4>Organización del Contenido</h4>
                         <p>La obra se organiza en cinco partes fundamentales. La primera establece los principios de seguridad informática, actualizados para reflejar el panorama de amenazas 2023-2024. La segunda parte, dedicada a criptografía, incluye ahora secciones sobre criptografía post-cuántica. La tercera sección sobre seguridad de redes es donde encontramos el contenido más relevante para sistemas IDS/IPS, con dos capítulos completos dedicados a arquitecturas de detección modernas.</p>
                         
                         <div class="quote-block">
                             El capítulo 15, completamente reescrito, presenta un análisis comparativo de sistemas IDS/IPS modernos, incluyendo Snort 3.0, Suricata 7.0, y soluciones comerciales como Palo Alto Networks.
                         </div>
                         
-                        <h4 style="color: var(--primary-blue); margin: 24px 0 16px; font-size: 1.2rem;">Innovaciones Destacadas</h4>
+                        <h4>Innovaciones Destacadas</h4>
                         <p>Los autores incluyen laboratorios prácticos descargables que permiten a los estudiantes experimentar con configuraciones reales en entornos virtualizados seguros. Cada capítulo incluye objetivos de aprendizaje claros, casos de estudio actuales (incluyendo el incidente SolarWinds y ataques a infraestructura crítica 2023), y preguntas de revisión diferenciadas por nivel de dificultad.</p>
                         
-                        <h4 style="color: var(--primary-blue); margin: 24px 0 16px; font-size: 1.2rem;">Valor Pedagógico</h4>
+                        <h4>Valor Pedagógico</h4>
                         <p>Los recursos en línea complementarios incluyen presentaciones, bancos de preguntas, y máquinas virtuales preconfiguradas para práctica. La combinación de fundamentos sólidos con contenido actualizado lo convierte en el texto ideal para programas de pregrado y posgrado.</p>
                         
-                        <h4 style="color: var(--primary-blue); margin: 24px 0 16px; font-size: 1.2rem;">Recomendación Final</h4>
+                        <h4>Recomendación Final</h4>
                         <p><strong>Esencial</strong> para cursos universitarios de seguridad informática. La inversión en este recurso se justifica por su exhaustividad y relevancia continua en el campo. Su enfoque integral lo hace apropiado tanto para <span class="text-gradient">principiantes como para profesionales experimentados buscando actualización</span>.</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Bibliography Section -->
+        <section id="bibliografia" class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Bibliografía</h2>
+                <p class="section-subtitle">Referencias y fuentes consultadas para esta edición especializada</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-content">
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>Check Point Research.</strong> (2024). <em>A closer look at Q3 2024: 75% surge in cyber attacks worldwide</em>. Check Point Software Technologies. 
+                            <a href="https://blog.checkpoint.com/research/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://blog.checkpoint.com/research/</a>
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>CrowdStrike.</strong> (2025). <em>2025 global threat report: Latest cybersecurity trends & insights</em>. CrowdStrike Holdings, Inc. 
+                            <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://www.crowdstrike.com/global-threat-report/</a>
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>Cybersecurity News.</strong> (2025, enero). <em>Network intrusion detection for emerging 2025 cyber threats</em>. 
+                            <a href="https://cybersecuritynews.com/network-intrusion-detection/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://cybersecuritynews.com/network-intrusion-detection/</a>
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>Ghorbani, A. A., Lu, W., & Tavallaee, M.</strong> (2010). <em>Network intrusion detection and prevention: Concepts and techniques</em>. Springer. 
+                            <a href="https://doi.org/10.1007/978-0-387-88771-5" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://doi.org/10.1007/978-0-387-88771-5</a>
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>IBM Security.</strong> (2024). <em>X-Force threat intelligence index 2024</em>. IBM Corporation. 
+                            <a href="https://www.ibm.com/x-force" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://www.ibm.com/x-force</a>
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>Market Data Forecast.</strong> (2024). <em>Intrusion detection and prevention systems market size, 2033</em>. 
+                            <a href="https://www.marketdataforecast.com/market-reports/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://www.marketdataforecast.com/market-reports/</a>
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>NordLayer.</strong> (2024). <em>Cybersecurity statistics 2024: Key insights and numbers</em>. 
+                            <a href="https://nordlayer.com/blog/cybersecurity-statistics-2024/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://nordlayer.com/blog/cybersecurity-statistics-2024/</a>
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>Precedence Research.</strong> (2024). <em>Intrusion detection and prevention systems (IDPS) market size to hit USD 20.18 bn by 2034</em>. 
+                            <a href="https://www.precedenceresearch.com/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://www.precedenceresearch.com/</a>
+                        </li>
+                        <li style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed var(--border-light);">
+                            <strong>Stallings, W., & Brown, L.</strong> (2023). <em>Computer security: Principles and practice</em> (5ta ed.). Pearson.
+                        </li>
+                        <li>
+                            <strong>Verizon.</strong> (2025). <em>2025 data breach investigations report</em>. Verizon Communications Inc. 
+                            <a href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" style="color: var(--primary-blue); text-decoration: none;">https://www.verizon.com/business/resources/reports/dbir/</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
 
         <!-- Footer -->
         <footer class="footer">
@@ -1573,9 +1604,9 @@
                         <h4>Información de Contacto</h4>
                         <ul>
                             <li>Universidad Fidélitas</li>
-                            <li>Llorente de Tibás, San José</li>
+                            <li>Atenas, Alajuela</li>
                             <li>Costa Rica</li>
-                            <li><a href="mailto:jquirosc@estudiantes.ufidelitas.ac.cr">jquirosc@estudiantes.ufidelitas.ac.cr</a></li>
+                            <li><a href="mailto:jquiros70465@ufide.ac.cr">jquiros70465@ufide.ac.cr</a></li>
                         </ul>
                     </div>
                     
@@ -1594,7 +1625,7 @@
                             <li>Curso: Introducción a la Informática</li>
                             <li>Profesora: Ugalde Díaz Mariela de Jesús</li>
                             <li>Universidad Fidélitas</li>
-                            <li>Fecha: 21 de junio de 2025</li>
+                            <li>Fecha: 10 de junio de 2025</li>
                         </ul>
                     </div>
                     
@@ -1643,26 +1674,28 @@
             const navToggle = document.getElementById('navToggle');
             const navMenu = document.getElementById('navMenu');
 
-            navToggle.addEventListener('click', function() {
-                navToggle.classList.toggle('active');
-                navMenu.classList.toggle('mobile-active');
-            });
-
-            // Close mobile menu on link click
-            document.querySelectorAll('.nav-menu a').forEach(link => {
-                link.addEventListener('click', function() {
-                    navToggle.classList.remove('active');
-                    navMenu.classList.remove('mobile-active');
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navToggle.classList.toggle('active');
+                    navMenu.classList.toggle('mobile-active');
                 });
-            });
 
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-                    navToggle.classList.remove('active');
-                    navMenu.classList.remove('mobile-active');
-                }
-            });
+                // Close mobile menu on link click
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        navToggle.classList.remove('active');
+                        navMenu.classList.remove('mobile-active');
+                    });
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                        navToggle.classList.remove('active');
+                        navMenu.classList.remove('mobile-active');
+                    }
+                });
+            }
 
             // Smooth scrolling for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1732,7 +1765,6 @@
         let ticking = false;
         
         function updateOnScroll() {
-            // Batch scroll-dependent updates here
             ticking = false;
         }
         
@@ -1746,13 +1778,19 @@
         // Preload critical images
         const criticalImages = [
             'https://images.pexels.com/photos/5380650/pexels-photo-5380650.jpeg',
-            'https://staticfiles.acronis.com/images/content/3c77a691d3b8324e18300a730062ea54.png'
+            'https://staticfiles.acronis.com/images/content/3c77a691d3b8324e18300a730062ea54.png',
+            'https://cambiodigital-ol.com/wp-content/uploads/2025/02/Ciberataques.jpg'
         ];
 
         criticalImages.forEach(src => {
             const img = new Image();
             img.src = src;
         });
+
+        // Add easter egg for developers
+        console.log('%c🛡️ CYBERDEFENSA CR - Revista Digital', 'color: #0066ff; font-size: 20px; font-weight: bold;');
+        console.log('%c💡 Desarrollado por Jose Manuel Quiros Chaves', 'color: #00d4ff; font-size: 14px;');
+        console.log('%c🎓 Universidad Fidélitas - 2025', 'color: #8B5CF6; font-size: 12px;');
     </script>
 </body>
 </html>
